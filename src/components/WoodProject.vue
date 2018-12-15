@@ -27,7 +27,7 @@
               </div>
             </div>
             <div class="button">
-              <el-button type="text" @click="manage(item.courseId)">管理</el-button>
+              <el-button type="text" @click="manage(item.title,item.courseId)">管理</el-button>
               <el-button type="text" @click="view(item.courseId)">预览</el-button>
               <el-button type="text" @click="material(item.courseId)">材料</el-button>
               <el-button type="text" @click="xiajia(item.courseId)">下架</el-button>
@@ -101,7 +101,7 @@
               </div>
             </div>
             <div class="button">
-              <el-button type="text" @click="manage(item.courseId)">管理</el-button>
+              <el-button type="text" @click="manage(item.title,item.courseId)">管理</el-button>
               <el-button type="text" @click="view(item.courseId)">预览</el-button>
               <el-button type="text" @click="material(item.courseId)">材料</el-button>
               <el-button type="text" @click="shangjia(item.courseId)">上架</el-button>
@@ -296,8 +296,9 @@ export default {
         }
       });
     },
-    manage(courseId) {
+    manage(title,courseId) {
       window.localStorage.setItem("courseId", courseId);
+      window.localStorage.setItem("title", title);
       this.$router.push("/ProjectIntroduction");
     },
     material(courseId) {

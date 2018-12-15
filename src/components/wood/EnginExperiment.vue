@@ -23,7 +23,11 @@
 
           <el-button type="text" @click="watch(item.experimentId)">查看</el-button>
           <!-- <el-button type="text">编辑</el-button> -->
-          <el-button type="text" @click="addExperimentDetail(item.experimentId)">布置</el-button>
+          <el-button
+            type="text"
+            @click="addExperimentDetail(item.experimentId)"
+            :disabled="disabled(item.status)"
+          >布置</el-button>
         </div>
       </el-card>
     </div>
@@ -40,6 +44,14 @@ export default {
     this.getExperimentList();
   },
   methods: {
+    disabled(status) {
+      console.log(status);
+      if (status == "1") {
+        return true;
+      } else {
+        return false;
+      }
+    },
     watch(id) {
       this.$router.push({
         path: `/EnginExperimentDetail/${id}`
@@ -56,6 +68,7 @@ export default {
             type: "success",
             message: "布置成功！"
           });
+          this.getExperimentList();
         }
       });
     },

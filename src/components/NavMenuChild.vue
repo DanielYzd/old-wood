@@ -4,9 +4,13 @@
       <img src="../assets/nav_logo.png" alt>
     </div>
     <div class="zhuye" @click="back">
-      <img src="/static/zhuye1.png" onmouseover="this.src=('/static/zhuye2.png')"
-                    onmouseout="this.src=('/static/zhuye1.png')" alt>
-      <span>书签的制作...</span>
+      <img
+        src="/static/zhuye1.png"
+        onmouseover="this.src=('/static/zhuye2.png')"
+        onmouseout="this.src=('/static/zhuye1.png')"
+        alt
+      >
+      <span>{{title}}</span>
     </div>
     <el-menu
       router
@@ -68,13 +72,12 @@ export default {
   name: "NavMenu",
   data() {
     return {
-      defaultactive: ""
+      defaultactive: "",
+      title: window.localStorage.getItem('title')
     };
   },
   mounted() {
-    console.log(this.$router);
     let name = this.$router.history.current.name;
-    console.log(name);
     switch (name) {
       case "ProjectIntroduction":
         this.defaultactive = "/ProjectIntroduction";
@@ -119,10 +122,10 @@ export default {
       this.$router.push("/WoodProject");
     },
     handleOpen(key, keyPath) {
-      console.log(key, keyPath);
+    
     },
     handleClose(key, keyPath) {
-      console.log(key, keyPath);
+     
     }
   }
 };
@@ -148,11 +151,11 @@ export default {
     margin-top: 10px;
     margin-bottom: 10px;
     cursor: pointer;
-    img {    
-      width:30px;
+    img {
+      width: 30px;
       height: 30px;
       margin-left: 10px;
-       vertical-align: middle;
+      vertical-align: middle;
     }
     span {
       margin-top: 5px;
