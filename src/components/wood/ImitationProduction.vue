@@ -13,7 +13,7 @@
         <img src="../../assets/example.png" class="image">
         <div class="detail">
           <div class="time">
-            <span style="font-size:18px;weight:bold;color:#2B4A7E">步骤</span>
+            <span style="font-size:18px;weight:bold;color:#2B4A7E">步骤{{item.sortId}}</span>
             <img src="../../assets/shijian1@2x.png" alt>
             <span style="font-size:12px;font-weight:bold;color:#666666">{{item.timeLength}}</span>
           </div>
