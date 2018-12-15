@@ -3,7 +3,7 @@
     <div class="child_head">
       <div class="block"></div>
       <div class="child_title">关于书签制作的智能加强的内容管理</div>
-       <el-button icon="el-icon-back" size="mini" @click="back">返回</el-button>
+      <el-button icon="el-icon-back" size="mini" @click="back">返回</el-button>
     </div>
     <div class="mainbody">
       <el-collapse v-model="activeNames">
@@ -100,14 +100,15 @@ export default {
       });
     },
 
-    setField(fieldName, data) {
+    setFieldByID(fieldName, data) {
       let body = {
         tableName: "tbl_school_intelligent",
         fieldName: fieldName,
-        courseId: window.localStorage.getItem("courseId"),
+        idName: "intelligentId",
+        idValue: this.$route.params.id,
         data: data
       };
-      this.http(this.api.setField, body).then(res => {
+      this.http(this.api.setFieldByID, body).then(res => {
         if (res.data.code == "0000") {
           this.$message({
             type: "success",
@@ -149,7 +150,7 @@ export default {
       this.hackReset = false;
       this.dialogVisible = false;
     },
-     back() {
+    back() {
       this.$router.push("/IntelligentEnhancement");
     },
     childByValue: function(childValue) {
@@ -158,19 +159,19 @@ export default {
       switch (this.tag) {
         case 1:
           this.comment = childValue;
-          this.setField("comment", childValue);
+          this.setFieldByID("comment", childValue);
           break;
         case 2:
           this.process = childValue;
-          this.setField("process", childValue);
+          this.setFieldByID("process", childValue);
           break;
         case 3:
           this.notice = childValue;
-          this.setField("notice", childValue);
+          this.setFieldByID("notice", childValue);
           break;
         case 4:
           this.other = childValue;
-          this.setField("other", childValue);
+          this.setFieldByID("other", childValue);
           break;
       }
       this.hackReset = false;

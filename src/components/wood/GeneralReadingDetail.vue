@@ -82,8 +82,8 @@ export default {
   data() {
     return {
       data: [],
-      showVisible:false,
-      content2:"",
+      showVisible: false,
+      content2: "",
       content: "",
       process: "",
       notice: "",
@@ -100,10 +100,10 @@ export default {
     this.getRefernenceDetailList();
   },
   methods: {
-    view(title,content){
-      this.showVisible=true;
-      this.content2=content;
-      this.title=title;
+    view(title, content) {
+      this.showVisible = true;
+      this.content2 = content;
+      this.title = title;
     },
 
     getRefernence() {
@@ -132,14 +132,15 @@ export default {
       });
     },
 
-    setField(fieldName, data) {
+    setFieldByID(fieldName, data) {
       let body = {
         tableName: "tbl_school_refernence",
         fieldName: fieldName,
-        courseId: window.localStorage.getItem("courseId"),
+        idName: "refernenceId",
+        idValue: this.$route.params.id,
         data: data
       };
-      this.http(this.api.setField, body).then(res => {
+      this.http(this.api.setFieldByID, body).then(res => {
         if (res.data.code == "0000") {
           this.$message({
             type: "success",
@@ -178,7 +179,7 @@ export default {
       switch (this.tag) {
         case 1:
           this.content = childValue;
-          this.setField("content", childValue);
+          this.setFieldByID("content", childValue);
           break;
       }
       this.hackReset = false;
@@ -233,7 +234,7 @@ export default {
       margin-bottom: 8px;
       .table {
         padding: 20px;
-         img {
+        img {
           margin-left: 10px;
           cursor: pointer;
         }
