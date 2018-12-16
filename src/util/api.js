@@ -114,6 +114,12 @@ const serviceModule = {
         method: 'get',
         showLoading: false
     },
+	// 查询组织列表 GET /school/manager/queryList
+	queryOrgList: {
+		url: apiBaseUrl + 'school/manager/queryList',
+		method: 'get',
+		showLoading: false
+	},
     //查询可订阅课程
     getSubscriptionList: {
         url: apiBaseUrl + 'school/manager/getSubscriptionList',
