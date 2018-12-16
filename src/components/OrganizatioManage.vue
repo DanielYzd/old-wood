@@ -69,8 +69,7 @@
 			return {
 				options: [{
 					value: '1',
-					label: '老师',
-          selected:true
+					label: '老师'
 				}, {
 					value: '2',
 					label: '班级'
@@ -86,7 +85,7 @@
         studentData: [],
         groupData: [],
         name:'',
-        type:'',
+        type:'1',
         isTeacherActive:false,
         isClassActive:false,
         isGroupActive:false,
@@ -94,7 +93,7 @@
 			};
 		},
     created() {
-      // this.getList(1);
+      this.getList(1);
     },
 		mounted() {},
 		methods: {
