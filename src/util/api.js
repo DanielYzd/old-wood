@@ -203,7 +203,26 @@ const serviceModule = {
         url: apiBaseUrl + 'school/project/getRefernenceDetailList',
         method: 'get',
         showLoading: false
-    }
+    },
+    //GET /school/project/getAllDetection 获取即时检测列表
+    getAllDetection: {
+        url: apiBaseUrl + 'school/project/getAllDetection',
+        method: 'get',
+        showLoading: false
+    },
+    // POST /school/project/setDetection
+    setDetection: {
+        url: apiBaseUrl + 'school/project/setDetection',
+        method: 'post',
+        showLoading: false
+    },
+    //GET /school/project/addDetectionDetail 布置检测题
+    addDetectionDetail: {
+        url: apiBaseUrl + 'school/project/addDetectionDetail',
+        method: 'get',
+        showLoading: false
+    },
+
 }
 const ApiSetting = {...serviceModule };
 
