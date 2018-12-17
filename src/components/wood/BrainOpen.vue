@@ -14,7 +14,7 @@
         <el-card :body-style="{ padding: '0px' }" class="card" v-for="(item,index) in data" :key="index">
           <img src="../../assets/1111.png" class="image">
           <div class="detail">
-            <span>思维图一</span>
+            <span>{{item.simpleTitle}}</span>
             <el-button>查看</el-button>
             <el-button>编辑</el-button>
           </div>
@@ -38,6 +38,7 @@ export default {
   },
   mounted() {
     this.getMindList();
+    this.getMindDetailList();
   },
   methods: {
     manage() {
@@ -50,6 +51,16 @@ export default {
       this.http(this.api.getMindList, body).then(res => {
         if (res.data.code == "0000") {
           this.data = res.data.data;
+        }
+      });
+    },
+    getMindDetailList(){
+      let body = {
+        courseId: window.localStorage.getItem("courseId")
+      };
+      this.http(this.api.getMindDetailList, body).then(res => {
+        if (res.data.code == "0000") {
+         
         }
       });
     }
