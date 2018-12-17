@@ -216,11 +216,11 @@ export default {
         font-weight: bold;
         color: rgba(138, 138, 138, 1);
       }
-      .el-button:hover {
-        color: #8de1bc;
-        border-color: none;
-        background-color: #8de1bc;
-      }
+      // .el-button:hover {
+      //   color: #8de1bc;
+      //   border-color: none;
+      //   background-color: #8de1bc;
+      // }
     }
     .el-collapse-item {
       margin-bottom: 8px;

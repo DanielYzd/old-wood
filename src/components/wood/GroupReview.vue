@@ -38,7 +38,7 @@
     <div class="dialog">
       <el-dialog
         :visible.sync="showVisible"
-        width="60%"
+        width="70%"
         custom-class="dialog"
         :close-on-click-modal="false"
         top="15vh"
@@ -57,25 +57,53 @@
           :header-cell-style="{'color':'#666666','font-size':'16px'}"
         >
           <el-table-column prop="studentName" label="评分人"></el-table-column>
-          <el-table-column label="学习态度得分">
+          <el-table-column label="学习态度得分" width="160">
             <template slot-scope="scope">
-              <star :score="scope.row.mannerScore"></star>
+              <!-- <star :score="scope.row.mannerScore"></star> -->
+              <el-rate
+                v-model="scope.row.mannerScore"
+                disabled
+                show-score
+                text-color="#ff9900"
+                score-template="{value}"
+              ></el-rate>
             </template>
           </el-table-column>
           <!-- <el-table-column prop="craftScore" label="作品得分"></el-table-column> -->
-          <el-table-column label="作品得分">
+          <el-table-column label="作品得分" width="160">
             <template slot-scope="scope">
-              <star :score="scope.row.craftScore"></star>
+              <!-- <star :score="scope.row.craftScore"></star> -->
+              <el-rate
+                v-model="scope.row.craftScore"
+                disabled
+                show-score
+                text-color="#ff9900"
+                score-template="{value}"
+              ></el-rate>
             </template>
           </el-table-column>
-          <el-table-column label="安全规范得分">
+          <el-table-column label="安全规范得分" width="160">
             <template slot-scope="scope">
-              <star :score="scope.row.securityScore"></star>
+              <el-rate
+                v-model="scope.row.securityScore"
+                disabled
+                show-score
+                text-color="#ff9900"
+                score-template="{value}"
+              ></el-rate>
+              <!-- <star :score="scope.row.securityScore"></star> -->
             </template>
           </el-table-column>
-          <el-table-column label="总体表现得分">
+          <el-table-column label="总体表现得分" width="160">
             <template slot-scope="scope">
-              <star :score="scope.row.expressionScore"></star>
+              <el-rate
+                v-model="scope.row.expressionScore"
+                disabled
+                show-score
+                text-color="#ff9900"
+                score-template="{value}"
+              ></el-rate>
+              <!-- <star :score="scope.row.expressionScore"></star> -->
             </template>
           </el-table-column>
           <el-table-column prop="lastUpdateDate" label="评价时间"></el-table-column>

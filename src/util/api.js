@@ -216,7 +216,18 @@ const serviceModule = {
         method: 'get',
         showLoading: false
     },
-
+    //GET /school/project/getMindList 脑图列表
+    getMindList: {
+        url: apiBaseUrl + 'school/project/getMindList',
+        method: 'get',
+        showLoading: false
+    },
+    //GET /school/project/getMindDetailList 脑洞开开开
+    getMindDetailList: {
+        url: apiBaseUrl + 'school/project/getMindDetailList',
+        method: 'get',
+        showLoading: false
+    },
 }
 const ApiSetting = {...serviceModule };
 

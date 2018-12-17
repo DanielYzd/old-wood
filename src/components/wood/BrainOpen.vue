@@ -11,44 +11,12 @@
           <span>思维图</span>
           <el-button icon="el-icon-plus">新增</el-button>
         </div>
-        <el-card :body-style="{ padding: '0px' }" class="card">
+        <el-card :body-style="{ padding: '0px' }" class="card" v-for="(item,index) in data" :key="index">
           <img src="../../assets/1111.png" class="image">
           <div class="detail">
             <span>思维图一</span>
-            <el-button >查看</el-button>
-             <el-button >编辑</el-button>
-          </div>
-        </el-card>
-         <el-card :body-style="{ padding: '0px' }" class="card">
-          <img src="../../assets/1111.png" class="image">
-          <div class="detail">
-            <span>思维图二</span>
-            <el-button >查看</el-button>
-             <el-button >编辑</el-button>
-          </div>
-        </el-card>
-        <el-card :body-style="{ padding: '0px' }" class="card">
-          <img src="../../assets/1111.png" class="image">
-          <div class="detail">
-            <span>思维图3</span>
-            <el-button >查看</el-button>
-             <el-button >编辑</el-button>
-          </div>
-        </el-card>
-        <el-card :body-style="{ padding: '0px' }" class="card">
-          <img src="../../assets/1111.png" class="image">
-          <div class="detail">
-            <span>思维图</span>
-             <el-button >查看</el-button>
-            <el-button icon="el-icon-edit">编辑</el-button>
-          </div>
-        </el-card>
-        <el-card :body-style="{ padding: '0px' }" class="card">
-          <img src="../../assets/1111.png" class="image">
-          <div class="detail">
-            <span>思维图一</span>
-             <el-button >查看</el-button>
-            <el-button icon="el-icon-edit">编辑</el-button>
+            <el-button>查看</el-button>
+            <el-button>编辑</el-button>
           </div>
         </el-card>
       </div>
@@ -64,14 +32,26 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      data: []
+    };
   },
   mounted() {
-    
+    this.getMindList();
   },
   methods: {
     manage() {
-     
+      this.getMindList();
+    },
+    getMindList() {
+      let body = {
+        courseId: window.localStorage.getItem("courseId")
+      };
+      this.http(this.api.getMindList, body).then(res => {
+        if (res.data.code == "0000") {
+          this.data = res.data.data;
+        }
+      });
     }
   }
 };
