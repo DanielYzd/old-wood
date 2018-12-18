@@ -100,7 +100,7 @@ export default {
       experimentDetailId: "",
       title: "",
       experimentList: [],
-      activeNames: ["1"],
+      activeNames: ["1","2"],
       childcontent: "",
       dialogVisible: false,
       showVisible: false,

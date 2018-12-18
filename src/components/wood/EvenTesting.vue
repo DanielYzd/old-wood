@@ -42,6 +42,7 @@
             </div>
           </template>
           <div v-html="content2" class="content">{{content2}}</div>
+           <div class="answer">正确答案：{{answer2}}</div>
         </el-collapse-item>
         <el-collapse-item name="3">
           <template slot="title">
@@ -118,7 +119,7 @@ export default {
       classList: [],
       value: "",
       disabled: false,
-      activeNames: ["1"],
+      activeNames: ["1","2","3","4","5","6"],
       dialogVisible: false,
       hackReset: true,
       tag: "",

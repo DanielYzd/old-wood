@@ -83,7 +83,7 @@ export default {
       knowledge3: "",
       knowledge4: "",
       knowledge5: "",
-      activeNames: ["1"],
+       activeNames: ["1","2","3","4","5"],
       childcontent: "",
       dialogVisible: false,
       hackReset: true,

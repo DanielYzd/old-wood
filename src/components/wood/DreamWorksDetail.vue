@@ -52,7 +52,7 @@
 export default {
   data() {
     return {
-      activeNames: ["1"],
+      activeNames: ["1", "2", "3"],
       statusA: false,
       statusB: false,
       statusC: false,

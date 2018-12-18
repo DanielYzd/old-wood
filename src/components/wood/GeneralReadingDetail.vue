@@ -88,7 +88,7 @@ export default {
       process: "",
       notice: "",
       other: "",
-      activeNames: ["1"],
+      activeNames: ["1","2"],
       childcontent: "",
       dialogVisible: false,
       hackReset: true,
