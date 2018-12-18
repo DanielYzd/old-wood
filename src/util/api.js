@@ -114,12 +114,12 @@ const serviceModule = {
         method: 'get',
         showLoading: false
     },
-	// 查询组织列表 GET /school/manager/queryList
-	queryOrgList: {
-		url: apiBaseUrl + 'school/manager/queryList',
-		method: 'get',
-		showLoading: false
-	},
+    // 查询组织列表 GET /school/manager/queryList
+    queryOrgList: {
+        url: apiBaseUrl + 'school/manager/queryList',
+        method: 'get',
+        showLoading: false
+    },
     //查询可订阅课程
     getSubscriptionList: {
         url: apiBaseUrl + 'school/manager/getSubscriptionList',
@@ -232,6 +232,48 @@ const serviceModule = {
     getMindDetailList: {
         url: apiBaseUrl + 'school/project/getMindDetailList',
         method: 'get',
+        showLoading: false
+    },
+    // 新品推广会列表 GET /school/project/getPopularizeList
+    getPopularizeList: {
+        url: apiBaseUrl + 'school/project/getPopularizeList',
+        method: 'get',
+        showLoading: false
+    },
+    //GET /school/project/getPopularize 
+    getPopularize: {
+        url: apiBaseUrl + 'school/project/getPopularize',
+        method: 'get',
+        showLoading: false
+    },
+    //GET /school/project/getMind
+    getMind: {
+        url: apiBaseUrl + 'school/project/getMind',
+        method: 'get',
+        showLoading: false
+    },
+    //GET /school/project/getMindDetail
+    getMindDetail: {
+        url: apiBaseUrl + 'school/project/getMindDetail',
+        method: 'get',
+        showLoading: false
+    },
+    //GET /school/project/addMind
+    addMind: {
+        url: apiBaseUrl + 'school/project/addMind',
+        method: 'get',
+        showLoading: false
+    },
+    //GET /school/project/delMind
+    delMind: {
+        url: apiBaseUrl + 'school/project/delMind',
+        method: 'get',
+        showLoading: false
+    },
+    //POST /school/project/setMind
+    setMind: {
+        url: apiBaseUrl + 'school/project/setMind',
+        method: 'post',
         showLoading: false
     },
 }

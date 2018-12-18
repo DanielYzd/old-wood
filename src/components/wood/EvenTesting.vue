@@ -4,6 +4,14 @@
       <div class="block"></div>
       <div class="child_title">关于书签制作的知识检测，以小组为单位答题</div>
       <div class="buzhi">
+        <el-select v-model="value" placeholder="选择班级" size="mini" @change="handlechange">
+          <el-option
+            v-for="item in classList"
+            :key="item.classId"
+            :label="item.className"
+            :value="item.classId"
+          ></el-option>
+        </el-select>
         <el-button
           icon="el-icon-document"
           style="padding:0"
@@ -107,6 +115,8 @@ export default {
   },
   data() {
     return {
+      classList: [],
+      value: "",
       disabled: false,
       activeNames: ["1"],
       dialogVisible: false,
@@ -130,11 +140,31 @@ export default {
   },
   mounted() {
     this.getAllDetection();
+    this.getClassList();
   },
   methods: {
+    handlechange() {
+      console.log(this.value);
+    },
+    getClassList() {
+      this.http(this.api.getClassList).then(res => {
+        if (res.data.code == "0000") {
+          this.classList = res.data.data;
+          if (this.classList.length > 0) {
+            this.value = this.classList[0].classId;
+          } else {
+            this.$message({
+              type: "warning",
+              message: "获取班级列表失败！"
+            });
+          }
+        }
+      });
+    },
     addDetectionDetail() {
       let body = {
-        courseId: window.localStorage.getItem("courseId")
+        courseId: window.localStorage.getItem("courseId"),
+        classId: this.value
       };
       this.http(this.api.addDetectionDetail, body).then(res => {
         if (res.data.code == "0000") {
@@ -165,15 +195,15 @@ export default {
           this.answer5 = data.answer5;
           this.answer6 = data.answer6;
           this.detectionId = data.detectionId;
-          let status = data.status;
-          switch (status) {
-            case 1:
-              this.disabled = true;
-              break;
-            case 0:
-              this.disabled = false;
-              break;
-          }
+          // let status = data.status;
+          // switch (status) {
+          //   case 1:
+          //     this.disabled = true;
+          //     break;
+          //   case 0:
+          //     this.disabled = false;
+          //     break;
+          // }
         }
       });
     },
@@ -241,7 +271,6 @@ export default {
 
     childByValue: function(childValue, answer) {
       // childValue就是子组件传过来的值
-      debugger;
       switch (this.tag) {
         case 1:
           this.content1 = childValue;

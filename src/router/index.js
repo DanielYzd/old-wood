@@ -19,6 +19,7 @@ import DreamWorksDetail from '@/components/wood/DreamWorksDetail.vue'
 import EvenTesting from '@/components/wood/EvenTesting.vue'
 import GroupReview from '@/components/wood/GroupReview.vue'
 import NewProduct from '@/components/wood/NewProduct.vue'
+import NewProductDetail from '@/components/wood/NewProductDetail.vue'
 import BrainOpen from '@/components/wood/BrainOpen.vue'
 import VideoSub from '@/components/VideoSub.vue'
 import Ue from '@/components/Ue.vue'
@@ -69,6 +70,7 @@ let routes = [{
             { path: '/EvenTesting', component: EvenTesting, name: 'EvenTesting' },
             { path: '/GroupReview', component: GroupReview, name: 'GroupReview' },
             { path: '/NewProduct', component: NewProduct, name: 'NewProduct' },
+            { path: '/NewProductDetail/:id', component: NewProductDetail, name: 'NewProductDetail' },
             { path: '/BrainOpen', component: BrainOpen, name: 'BrainOpen' },
             { path: '/Ue', component: Ue, name: 'Ue' },
         ]

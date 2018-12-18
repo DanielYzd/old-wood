@@ -8,36 +8,20 @@
       <div class="maintitle">
         <img src="../../assets/new.png" alt>
         <div class="suspro">新品推广会</div>
-        <div class="select">
-          <span>班级</span>
-          <el-select v-model="value" size="mini" placeholder="请选择">
-            <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            ></el-option>
-          </el-select>
-        </div>
       </div>
-      <el-card :body-style="{ padding: '0px' }" class="card">
+      <el-card
+        :body-style="{ padding: '0px' }"
+        class="card"
+        v-for="(item,index) in data"
+        :key="index"
+      >
         <img src="../../assets/example.png" class="image">
         <div class="detail">
           <div class="time">
-            <span style="font-size:18px;weight:bold;color:#2B4A7E">新品推广1</span>
-            <div style="font-size:12px;font-weight:bold;color:#666666;">班级：201701</div>
+            <span style="font-size:18px;weight:bold;color:#2B4A7E">{{item.simpleTitle}}</span>
+            <div style="font-size:12px;font-weight:bold;color:#666666;">班级：{{item.className}}</div>
           </div>
-          <el-button type="text">查看</el-button>
-        </div>
-      </el-card>
-      <el-card :body-style="{ padding: '0px' }" class="card">
-        <img src="../../assets/example.png" class="image">
-        <div class="detail">
-          <div class="time">
-            <span style="font-size:18px;weight:bold;color:#2B4A7E">新品推广2</span>
-            <div style="font-size:12px;font-weight:bold;color:#666666;">班级：201702</div>
-          </div>
-          <el-button type="text">查看</el-button>
+          <el-button type="text" @click="watch(item.popularizeId)">查看</el-button>
         </div>
       </el-card>
     </div>
@@ -47,30 +31,28 @@
 export default {
   data() {
     return {
-      options: [
-        {
-          value: "选项1",
-          label: "黄金糕"
-        },
-        {
-          value: "选项2",
-          label: "双皮奶"
-        },
-        {
-          value: "选项3",
-          label: "蚵仔煎"
-        },
-        {
-          value: "选项4",
-          label: "龙须面"
-        },
-        {
-          value: "选项5",
-          label: "北京烤鸭"
-        }
-      ],
-      value: ""
+      data: []
     };
+  },
+  mounted() {
+    this.getPopularizeList();
+  },
+  methods: {
+    getPopularizeList() {
+      let body = {
+        courseId: window.localStorage.getItem("courseId")
+      };
+      this.http(this.api.getPopularizeList, body).then(res => {
+        if (res.data.code == "0000") {
+          this.data = res.data.data;
+        }
+      });
+    },
+    watch(id) {
+      this.$router.push({
+        path: `/NewProductDetail/${id}`
+      });
+    }
   }
 };
 </script>

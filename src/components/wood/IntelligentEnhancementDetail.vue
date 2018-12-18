@@ -73,7 +73,7 @@ export default {
       process: "",
       notice: "",
       other: "",
-      activeNames: ["1"],
+      activeNames: ["1","2","3","4"],
       childcontent: "",
       dialogVisible: false,
       hackReset: true,

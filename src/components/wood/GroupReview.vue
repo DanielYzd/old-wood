@@ -57,7 +57,7 @@
           :header-cell-style="{'color':'#666666','font-size':'16px'}"
         >
           <el-table-column prop="studentName" label="评分人"></el-table-column>
-          <el-table-column label="学习态度得分" width="160">
+          <el-table-column label="学习态度得分" width="170">
             <template slot-scope="scope">
               <!-- <star :score="scope.row.mannerScore"></star> -->
               <el-rate
@@ -70,7 +70,7 @@
             </template>
           </el-table-column>
           <!-- <el-table-column prop="craftScore" label="作品得分"></el-table-column> -->
-          <el-table-column label="作品得分" width="160">
+          <el-table-column label="作品得分" width="170">
             <template slot-scope="scope">
               <!-- <star :score="scope.row.craftScore"></star> -->
               <el-rate
@@ -82,7 +82,7 @@
               ></el-rate>
             </template>
           </el-table-column>
-          <el-table-column label="安全规范得分" width="160">
+          <el-table-column label="安全规范得分" width="170">
             <template slot-scope="scope">
               <el-rate
                 v-model="scope.row.securityScore"
@@ -94,7 +94,8 @@
               <!-- <star :score="scope.row.securityScore"></star> -->
             </template>
           </el-table-column>
-          <el-table-column label="总体表现得分" width="160">
+          
+          <el-table-column label="总体表现得分" width="170">
             <template slot-scope="scope">
               <el-rate
                 v-model="scope.row.expressionScore"
