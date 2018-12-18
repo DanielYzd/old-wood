@@ -13,7 +13,7 @@
         <el-button icon="el-icon-search" class="edit" size="mini" @click="getList">查询</el-button>
 
         <el-input v-model="name" class="queryName" placeholder="请输入名称进行搜索" size="mini"></el-input>
-        <el-select v-model="type" placeholder="请选择" size="mini" class="edit">
+        <el-select v-model="type" placeholder="请选择" size="mini" class="edit" @change="handlechange">
           <el-option
             v-for="item in options"
             :key="item.value"
@@ -45,7 +45,40 @@
           <el-table-column prop="teacherName" label="老师名称"></el-table-column>
           <el-table-column prop="account" label="帐号"></el-table-column>
           <el-table-column prop="mobile" label="手机号码"></el-table-column>
+          <el-table-column label="操作">
+            <template slot-scope="scope">
+              &nbsp;
+              <img
+                src="/static/bj1.png"
+                onmouseover="this.src=('/static/bj2.png')"
+                onmouseout="this.src=('/static/bj1.png')"
+                @click="edit(scope.row.teacherId,scope.row)"
+              >
+              &nbsp;
+              <img
+                src="/static/shanchu.png"
+                @click="remove(scope.row.teacherId)"
+              >
+            </template>
+          </el-table-column>
         </el-table>
+        <el-dialog title="编辑老师信息" :visible.sync="teacherEditDialog">
+          <el-form :model="form">
+            <el-form-item label="老师代码" :label-width="formLabelWidth">
+              <el-input v-model="form.teacherId" autocomplete="off"></el-input>
+            </el-form-item>
+            <el-form-item label="老师名称" :label-width="formLabelWidth">
+              <el-input v-model="form.teacherName" autocomplete="off"></el-input>
+            </el-form-item>
+            <el-form-item label="手机号码" :label-width="formLabelWidth">
+              <el-input v-model="form.mobile" autocomplete="off"></el-input>
+            </el-form-item>
+          </el-form>
+          <div slot="footer" class="dialog-footer">
+            <el-button @click="teacherEditDialog = false">取 消</el-button>
+            <el-button type="primary" @click="teacherEditDialog = false">确 定</el-button>
+          </div>
+        </el-dialog>
       </div>
       <div class="noDisplay" v-bind:class="{ active: isClassActive}">
         <el-table
@@ -57,7 +90,37 @@
         >
           <el-table-column prop="classId" label="班级代码"></el-table-column>
           <el-table-column prop="className" label="班级名称"></el-table-column>
+          <el-table-column label="操作">
+            <template slot-scope="scope">
+              &nbsp;
+              <img
+                src="/static/bj1.png"
+                onmouseover="this.src=('/static/bj2.png')"
+                onmouseout="this.src=('/static/bj1.png')"
+                @click="edit(scope.row.classId,scope.row)"
+              >
+              &nbsp;
+              <img
+                src="/static/shanchu.png"
+                @click="remove(scope.row.classId)"
+              >
+            </template>
+          </el-table-column>
         </el-table>
+        <el-dialog title="编辑班级信息" :visible.sync="classEditDialog">
+          <el-form :model="form">
+            <el-form-item label="班级代码" :label-width="formLabelWidth">
+              <el-input v-model="form.classId" autocomplete="off"></el-input>
+            </el-form-item>
+            <el-form-item label="班级名称" :label-width="formLabelWidth">
+              <el-input v-model="form.className" autocomplete="off"></el-input>
+            </el-form-item>
+          </el-form>
+          <div slot="footer" class="dialog-footer">
+            <el-button @click="classEditDialog = false">取 消</el-button>
+            <el-button type="primary" @click="classEditDialog = false">确 定</el-button>
+          </div>
+        </el-dialog>
       </div>
       <div class="noDisplay" v-bind:class="{ active: isGroupActive}">
         <el-table
@@ -69,7 +132,37 @@
         >
           <el-table-column prop="groupId" label="小组代码"></el-table-column>
           <el-table-column prop="groupName" label="小组名称"></el-table-column>
+          <el-table-column label="操作">
+            <template slot-scope="scope">
+              &nbsp;
+              <img
+                src="/static/bj1.png"
+                onmouseover="this.src=('/static/bj2.png')"
+                onmouseout="this.src=('/static/bj1.png')"
+                @click="edit(scope.row.groupId,scope.row)"
+              >
+              &nbsp;
+              <img
+                src="/static/shanchu.png"
+                @click="remove(scope.row.groupId)"
+              >
+            </template>
+          </el-table-column>
         </el-table>
+        <el-dialog title="编辑小组信息" :visible.sync="groupEditDialog">
+          <el-form :model="form">
+            <el-form-item label="小组代码" :label-width="formLabelWidth">
+              <el-input v-model="form.groupId" autocomplete="off"></el-input>
+            </el-form-item>
+            <el-form-item label="小组名称" :label-width="formLabelWidth">
+              <el-input v-model="form.groupName" autocomplete="off"></el-input>
+            </el-form-item>
+          </el-form>
+          <div slot="footer" class="dialog-footer">
+            <el-button @click="groupEditDialog = false">取 消</el-button>
+            <el-button type="primary" @click="groupEditDialog = false">确 定</el-button>
+          </div>
+        </el-dialog>
       </div>
       <div class="noDisplay" v-bind:class="{ active: isStudentActive}">
         <el-table
@@ -81,9 +174,45 @@
         >
           <el-table-column prop="studentId" label="学生代码"></el-table-column>
           <el-table-column prop="studentName" label="学生名称"></el-table-column>
-          <el-table-column prop="account" label="帐号"></el-table-column>
-          <el-table-column prop="mobile" label="手机号码"></el-table-column>
+          <el-table-column prop="classId" label="班级"></el-table-column>
+          <el-table-column prop="groupId" label="小组"></el-table-column>
+          <el-table-column label="操作">
+            <template slot-scope="scope">
+              &nbsp;
+              <img
+                src="/static/bj1.png"
+                onmouseover="this.src=('/static/bj2.png')"
+                onmouseout="this.src=('/static/bj1.png')"
+                @click="edit(scope.row.studentId,scope.row)"
+              >
+              &nbsp;
+              <img
+                src="/static/shanchu.png"
+                @click="remove(scope.row.studentId)"
+              >
+            </template>
+          </el-table-column>
         </el-table>
+        <el-dialog title="编辑学生信息" :visible.sync="studentEditDialog">
+          <el-form :model="form">
+            <el-form-item label="学生代码" :label-width="formLabelWidth">
+              <el-input v-model="form.studentId" autocomplete="off"></el-input>
+            </el-form-item>
+            <el-form-item label="学生姓名" :label-width="formLabelWidth">
+              <el-input v-model="form.studentName" autocomplete="off"></el-input>
+            </el-form-item>
+            <el-form-item label="学生班级" :label-width="formLabelWidth">
+              <el-input v-model="form.classId" autocomplete="off"></el-input>
+            </el-form-item>
+            <el-form-item label="学生小组" :label-width="formLabelWidth">
+              <el-input v-model="form.groupId" autocomplete="off"></el-input>
+            </el-form-item>
+          </el-form>
+          <div slot="footer" class="dialog-footer">
+            <el-button @click="studentEditDialog = false">取 消</el-button>
+            <el-button type="primary" @click="submitform">确 定</el-button>
+          </div>
+        </el-dialog>
       </div>
     </div>
   </div>
@@ -121,7 +250,18 @@ export default {
       isTeacherActive: false,
       isClassActive: false,
       isGroupActive: false,
-      isStudentActive: false
+      isStudentActive: false,
+      studentEditDialog:false,
+      classEditDialog:false,
+      groupEditDialog:false,
+      teacherEditDialog:false,
+      form: {
+          name: '',
+          id: '',
+          classId: '',
+          groupId: ''
+      },
+      formLabelWidth: '100px'
     };
   },
   created() {
@@ -129,20 +269,52 @@ export default {
   },
   mounted() {},
   methods: {
-    getList(inType) {
-      console.log(inType);
+    handlechange(){
+      this.getList(this.value);
+    },
+    submitform(){
+      let url;
+      if (this.type == 1) {
+        url = this.api.setTeacherInfo;
+      } else if (this.type == 2){
+        url = this.api.setClassInfo;
+      }else if (this.type == 3){
+        url = this.api.setGroupInfo;
+      }else if (this.type == 4){
+        url = this.api.setStudentInfo;
+      }
+      this.http(url, this.form).then(res => {
+        if (res.data.code == "0000") {
+          this.getList();
+          this.clearDialog();
+          this.$message({
+            type: 'success',
+            message: '修改成功!'
+          });
+        } else {
+          this.$message({
+            type: 'success',
+            message: res.data.message
+          });
+        }
+      });
+    },
+    clearDialog(){
+      this.studentEditDialog=false;
+      this.classEditDialog=false;
+      this.groupEditDialog=false;
+      this.teacherEditDialog=false;
+    },
+    getList() {
       let body = {
         name: this.name,
-        type: inType > 0 && inType < 5 ? inType : this.type,
+        type: this.type,
         //TODO 页面需要添加分页 插件
         pageNo: 1,
         pageSize: 9999
       };
-      console.dir(body);
+
       this.http(this.api.queryOrgList, body).then(res => {
-        console.log(res);
-        console.log("rows");
-        console.dir(res.data.data.rows);
 
         (this.isTeacherActive = false),
           (this.isClassActive = false),
@@ -163,6 +335,70 @@ export default {
           this.isStudentActive = true;
         }
       });
+    },
+    edit(id,row){
+      this.clearDialog();
+      if (this.type == 1) {
+        this.teacherEditDialog = true;
+        this.form.teacherId = row.teacherId;
+        this.form.teacherName = row.teacherName; 
+      } else if (this.type == 2){
+        this.classEditDialog = true;
+        this.form.classId = row.classId;
+        this.form.className = row.className;  
+      }else if (this.type == 3){
+        this.groupEditDialog = true;
+        this.form.groupId = row.groupId;
+        this.form.groupName = row.groupName;
+      }else if (this.type == 4){
+        this.form.studentId = row.studentId;
+        this.form.studentName = row.studentName;
+        this.form.classId = row.classId;
+        this.form.groupId = row.groupId;
+        this.studentEditDialog = true;
+      }
+    },
+    remove(id){
+      let url;
+      if (this.type == 1) {
+        url = this.api.deleteTeacherInfo;
+      } else if (this.type == 2){
+        url = this.api.deleteClassInfo;
+      }else if (this.type == 3){
+        url = this.api.deleteGroupInfo;
+      }else if (this.type == 4){
+        url = this.api.deleteStudentInfo;
+      }
+      let body = {
+        id: id
+      };
+      console.log(url);
+      console.log('开始删除了...');
+      this.$confirm('此操作将永久删除该数据, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.http(url, body).then(res => {
+            if (res.data.code == "0000") {
+              this.getList();
+              this.$message({
+                type: 'success',
+                message: '删除成功!'
+              });
+            } else {
+              this.$message({
+                type: 'success',
+                message: res.data.message
+              });
+            }
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          });          
+        });
     },
     dr() {
       document.querySelector("#uniqueId input").click();

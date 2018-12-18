@@ -281,6 +281,54 @@ const serviceModule = {
         url: apiBaseUrl + 'school/common/getFunctionDesc',
         method: 'get',
         showLoading: false
+    },
+    //school/manager/deleteTeacherInfo
+    deleteTeacherInfo: {
+        url: apiBaseUrl + 'school/manager/deleteTeacherInfo',
+        method: 'get',
+        showLoading: false
+    },
+    //school/manager/deleteClassInfo
+    deleteClassInfo: {
+        url: apiBaseUrl + 'school/manager/deleteClassInfo',
+        method: 'get',
+        showLoading: false
+    },
+    //school/manager/deleteGroupInfo
+    deleteGroupInfo: {
+        url: apiBaseUrl + 'school/manager/deleteGroupInfo',
+        method: 'get',
+        showLoading: false
+    },
+    //school/manager/deleteStudentInfo
+    deleteStudentInfo: {
+        url: apiBaseUrl + 'school/manager/deleteStudentInfo',
+        method: 'get',
+        showLoading: false
+    },
+    //school/manager/setTeacherInfo
+    setTeacherInfo: {
+        url: apiBaseUrl + 'school/manager/setTeacherInfo',
+        method: 'post',
+        showLoading: false
+    },
+    //school/manager/setClassInfo
+    setClassInfo: {
+        url: apiBaseUrl + 'school/manager/setClassInfo',
+        method: 'post',
+        showLoading: false
+    },
+    //school/manager/setGroupInfo
+    setGroupInfo: {
+        url: apiBaseUrl + 'school/manager/setGroupInfo',
+        method: 'post',
+        showLoading: false
+    },
+    //school/manager/setStudentInfo
+    setStudentInfo: {
+        url: apiBaseUrl + 'school/manager/setStudentInfo',
+        method: 'post',
+        showLoading: false
     }
 }
 const ApiSetting = {...serviceModule };
