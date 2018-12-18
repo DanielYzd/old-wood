@@ -276,6 +276,12 @@ const serviceModule = {
         method: 'post',
         showLoading: false
     },
+    //school/common/getFunctionDesc
+    getFunctionDesc: {
+        url: apiBaseUrl + 'school/common/getFunctionDesc',
+        method: 'get',
+        showLoading: false
+    }
 }
 const ApiSetting = {...serviceModule };
 

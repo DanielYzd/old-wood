@@ -2,7 +2,7 @@
   <div class="project">
     <div class="child_head">
       <div class="block"></div>
-      <div class="child_title">学校已订阅的项目</div>
+      <div class="child_title">{{title}}</div>
     </div>
     <div class="woodproject">
       <div class="top">
@@ -109,7 +109,7 @@
           </div>
         </el-card>
       </div>
-       <div class="materialdialog">
+      <div class="materialdialog">
         <el-dialog
           :visible.sync="materialdialogVisible"
           width="80%"
@@ -161,21 +161,30 @@ export default {
   },
   data() {
     return {
+      title: "",
       data: [],
       data1: [],
       dialogVisible: false,
       vedioUrl: "",
       palyerReset: false,
-        hackReset: false,
+      hackReset: false,
       moviedata: [],
       moviedialogVisible: false,
-      materialdialogVisible:false,
-       dapi: "http://ldzwh.oss-cn-hangzhou.aliyuncs.com/"
+      materialdialogVisible: false,
+      dapi: "http://ldzwh.oss-cn-hangzhou.aliyuncs.com/"
     };
   },
   mounted() {
     this.getCourseList();
     this.getCourseList1();
+  },
+  created() {
+    let body = {
+      functionId: "0102"
+    };
+    this.http(this.api.getFunctionDesc, body).then(res => {
+      this.title = res.data.data;
+    });
   },
   methods: {
     playerclose() {
@@ -296,7 +305,7 @@ export default {
         }
       });
     },
-    manage(title,courseId) {
+    manage(title, courseId) {
       window.localStorage.setItem("courseId", courseId);
       window.localStorage.setItem("title", title);
       this.$router.push("/ProjectIntroduction");
@@ -315,10 +324,10 @@ export default {
         }
       });
     },
-     close() {
+    close() {
       this.hackReset = false;
       this.materialdialogVisible = false;
-    },
+    }
   }
 };
 </script>

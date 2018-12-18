@@ -65,7 +65,7 @@
         top="15vh"
       >
         <template slot="title">{{title}}</template>
-        <div class="content" v-html="content">{{content}}</div>
+        <div  v-html="content">{{content}}</div>
       </el-dialog>
       <el-dialog
         :visible.sync="dialogVisible"

@@ -2,7 +2,7 @@
   <div class="vediosub">
     <div class="child_head">
       <div class="block"></div>
-      <div class="child_title">平台提供的可订阅STEM课程</div>
+      <div class="child_title">{{title}}</div>
     </div>
     <div class="testdddd">
       <div class="suscribetitle">
@@ -123,13 +123,14 @@ export default {
   },
   data() {
     return {
+      title: '',
       currentDate: new Date(),
       dialogVisible: false,
       materialdialogVisible: false,
       moviedialogVisible: false,
       hackReset: false,
       palyerReset: false,
-      vedioUrl:'',
+      vedioUrl: "",
       data: [],
       materialData: [],
       moviedata: [],
@@ -139,24 +140,31 @@ export default {
   mounted() {
     this.getSubscriptionList();
   },
+   created() {
+    let body = {
+      functionId: "0101"
+    };
+    this.http(this.api.getFunctionDesc, body).then(res => {
+      this.title = res.data.data;
+    });
+  },
   methods: {
-    subscribe(courseId){
+    subscribe(courseId) {
       let body = {
         courseId: courseId
       };
-      this.http(this.api.addSubscriptionCourse,body).then(res=>{
-        if(res.data.code=="0000"){
+      this.http(this.api.addSubscriptionCourse, body).then(res => {
+        if (res.data.code == "0000") {
           this.$message({
-            type:'success',
-            message:'订阅成功！'
-          })
+            type: "success",
+            message: "订阅成功！"
+          });
           this.getSubscriptionList();
         }
-      })
+      });
     },
     getSubscriptionList() {
       this.http(this.api.getSubscriptionList).then(res => {
-        console.log(res);
         if (res.data.code == "0000") {
           let data = res.data.data;
           for (let i = 0; i < data.length; i++) {
@@ -193,8 +201,8 @@ export default {
         }
       });
     },
-    watch(url){
-      this.vedioUrl=url;
+    watch(url) {
+      this.vedioUrl = url;
       //this.$router.push("/video");
       // console.log(this.$refs.player);
       this.dialogVisible = true;

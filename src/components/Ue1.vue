@@ -35,16 +35,16 @@ export default {
     return {
       currentContent: this.content,
       currentanswer:this.answer,
-      editorOption: {
-        modules: {
-          toolbar: [
-            [{ size: ["small", false, "large"] }],
-            ["bold", "italic"],
-            [{ list: "ordered" }, { list: "bullet" }],
-            ["link", "image"]
-          ]
-        }
-      },
+      // editorOption: {
+      //   modules: {
+      //     toolbar: [
+      //       [{ size: ["small", false, "large"] }],
+      //       ["bold", "italic"],
+      //       [{ list: "ordered" }, { list: "bullet" }],
+      //       ["link", "image"]
+      //     ]
+      //   }
+      // },
       addImgRange: []
     };
   },

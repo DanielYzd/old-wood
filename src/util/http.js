@@ -155,6 +155,7 @@ const httpServer = (opts, data) => {
         let promise = new Promise(function(resolve, reject) {
             axios(httpDefaultOpts).then(
                 (res) => {
+                    // debugger;
                     successState(res);
                     resolve(res);
                 }

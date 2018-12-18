@@ -1,10 +1,10 @@
 <template>
   <div class="home">
     <el-row>
-      <el-col :span="4">
+      <el-col :span="3">
         <nav-menu></nav-menu>
       </el-col>
-      <el-col :span="20">
+      <el-col :span="21">
         <Header></Header>
         <div class="main">
           <router-view/>

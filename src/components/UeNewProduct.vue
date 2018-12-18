@@ -41,16 +41,16 @@ export default {
   data: function() {
     return {
       currentContent: this.content,
-      editorOption: {
-        modules: {
-          toolbar: [
-            [{ size: ["small", false, "large"] }],
-            ["bold", "italic"],
-            [{ list: "ordered" }, { list: "bullet" }],
-            ["link", "image"]
-          ]
-        }
-      },
+      // editorOption: {
+      //   modules: {
+      //     toolbar: [
+      //       [{ size: ["small", false, "large"] }],
+      //       ["bold", "italic"],
+      //       [{ list: "ordered" }, { list: "bullet" }],
+      //       ["link", "image"]
+      //     ]
+      //   }
+      // },
       addImgRange: [],
       select: [
         { value: "A", label: "商品交易" },
