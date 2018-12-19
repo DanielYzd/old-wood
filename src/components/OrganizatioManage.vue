@@ -132,6 +132,7 @@
         >
           <el-table-column prop="groupId" label="小组代码"></el-table-column>
           <el-table-column prop="groupName" label="小组名称"></el-table-column>
+          <el-table-column prop="className" label="班级"></el-table-column>
           <el-table-column label="操作">
             <template slot-scope="scope">
               &nbsp;
@@ -151,11 +152,18 @@
         </el-table>
         <el-dialog title="编辑小组信息" :visible.sync="groupEditDialog">
           <el-form :model="form">
-<!--             <el-form-item label="小组代码" :label-width="formLabelWidth">
-  <el-input v-model="form.groupId" autocomplete="off"></el-input>
-</el-form-item> -->
             <el-form-item label="小组名称" :label-width="formLabelWidth">
               <el-input v-model="form.groupName" autocomplete="off"></el-input>
+            </el-form-item>
+            <el-form-item label="班级" :label-width="formLabelWidth">
+              <el-select v-model="form.classId" placeholder="请选择" style="width:100%" >
+                <el-option
+                  v-for="item in classData"
+                  :key="item.classId"
+                  :label="item.className"
+                  :value="item.classId"
+                ></el-option>
+              </el-select>
             </el-form-item>
           </el-form>
           <div slot="footer" class="dialog-footer">
@@ -174,8 +182,8 @@
         >
           <el-table-column prop="studentId" label="学生代码"></el-table-column>
           <el-table-column prop="studentName" label="学生名称"></el-table-column>
-          <el-table-column prop="classId" label="班级"></el-table-column>
-          <el-table-column prop="groupId" label="小组"></el-table-column>
+          <el-table-column prop="className" label="班级"></el-table-column>
+          <el-table-column prop="groupName" label="小组"></el-table-column>
           <el-table-column label="操作">
             <template slot-scope="scope">
               &nbsp;
@@ -202,10 +210,26 @@
               <el-input v-model="form.studentName" autocomplete="off"></el-input>
             </el-form-item>
             <el-form-item label="学生班级" :label-width="formLabelWidth">
-              <el-input v-model="form.classId" autocomplete="off"></el-input>
+              <!-- <el-input v-model="form.classId" autocomplete="off"></el-input> -->
+              <el-select v-model="form.classId" placeholder="请选择" style="width:100%" @change="handlerClassChange">
+                <el-option
+                  v-for="item in classData"
+                  :key="item.classId"
+                  :label="item.className"
+                  :value="item.classId"
+                ></el-option>
+              </el-select>
             </el-form-item>
             <el-form-item label="学生小组" :label-width="formLabelWidth">
-              <el-input v-model="form.groupId" autocomplete="off"></el-input>
+             <!--  <el-input v-model="form.groupId" autocomplete="off"></el-input> -->
+              <el-select v-model="form.groupId" placeholder="请选择" style="width:100%">
+                <el-option
+                  v-for="item in groupData"
+                  :key="item.groupId"
+                  :label="item.groupName"
+                  :value="item.groupId"
+                ></el-option>
+              </el-select>
             </el-form-item>
           </el-form>
           <div slot="footer" class="dialog-footer">
@@ -272,20 +296,22 @@ export default {
     handlechange(){
       this.getList();
     },
+    handlerClassChange(val){
+      this.getGroupData(val);
+    },
     submitform(){
       let url;
-      console.log(this.type);
+
       if (this.type == 1) {
         url = this.api.setTeacherInfo;
       } else if (this.type == 2){
         url = this.api.setClassInfo;
       }else if (this.type == 3){
-        this.form.classId = null;
         url = this.api.setGroupInfo;
       }else if (this.type == 4){
         url = this.api.setStudentInfo;
       }
-      console.log(url);
+
       this.http(url, this.form).then(res => {
         if (res.data.code == "0000") {
           this.getList();
@@ -308,6 +334,39 @@ export default {
       this.groupEditDialog=false;
       this.teacherEditDialog=false;
     },
+    clearTable(){
+        (this.isTeacherActive = false),
+        (this.isClassActive = false),
+        (this.isGroupActive = false),
+        (this.isStudentActive = false);
+    },
+    getClassData(){
+      let body = {
+        type: 2,
+        pageNo: 1,
+        pageSize: 9999
+      };
+      this.http(this.api.queryOrgList, body).then(res => {
+        this.classData = res.data.data.rows;
+      });
+    },
+    getGroupData(classId){
+      let body = {
+        type: 3,
+        pageNo: 1,
+        pageSize: 9999
+      };
+      this.http(this.api.queryOrgList, body).then(res => {
+        let groupArray = [];
+        res.data.data.rows.forEach(function(item){
+          if (item.classId == classId){
+            groupArray.push(item);
+          }
+        });
+        this.form.groupId = null;
+        this.groupData = groupArray;
+      });
+    },
     getList() {
       let body = {
         name: this.name,
@@ -318,11 +377,7 @@ export default {
       };
 
       this.http(this.api.queryOrgList, body).then(res => {
-
-        (this.isTeacherActive = false),
-          (this.isClassActive = false),
-          (this.isGroupActive = false),
-          (this.isStudentActive = false);
+        this.clearTable();
 
         if (this.type == 1) {
           this.teacherData = res.data.data.rows;
@@ -351,14 +406,18 @@ export default {
         this.form.className = row.className;  
       }else if (this.type == 3){
         this.groupEditDialog = true;
+        this.getClassData();
         this.form.groupId = row.groupId;
         this.form.groupName = row.groupName;
       }else if (this.type == 4){
+        this.studentEditDialog = true;
+        this.getClassData();
+        //groupdata应该是根据classid的切换动态变化 
         this.form.studentId = row.studentId;
         this.form.studentName = row.studentName;
         this.form.classId = row.classId;
         this.form.groupId = row.groupId;
-        this.studentEditDialog = true;
+        
       }
     },
     remove(id){
