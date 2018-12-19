@@ -64,9 +64,9 @@
         </el-table>
         <el-dialog title="编辑老师信息" :visible.sync="teacherEditDialog">
           <el-form :model="form">
-            <el-form-item label="老师代码" :label-width="formLabelWidth">
-              <el-input v-model="form.teacherId" autocomplete="off"></el-input>
-            </el-form-item>
+<!--             <el-form-item label="老师代码" :label-width="formLabelWidth">
+  <el-input v-model="form.teacherId" autocomplete="off"></el-input>
+</el-form-item> -->
             <el-form-item label="老师名称" :label-width="formLabelWidth">
               <el-input v-model="form.teacherName" autocomplete="off"></el-input>
             </el-form-item>
@@ -76,7 +76,7 @@
           </el-form>
           <div slot="footer" class="dialog-footer">
             <el-button @click="teacherEditDialog = false">取 消</el-button>
-            <el-button type="primary" @click="teacherEditDialog = false">确 定</el-button>
+            <el-button type="primary" @click="submitform">确 定</el-button>
           </div>
         </el-dialog>
       </div>
@@ -109,16 +109,16 @@
         </el-table>
         <el-dialog title="编辑班级信息" :visible.sync="classEditDialog">
           <el-form :model="form">
-            <el-form-item label="班级代码" :label-width="formLabelWidth">
-              <el-input v-model="form.classId" autocomplete="off"></el-input>
-            </el-form-item>
+<!--             <el-form-item label="班级代码" :label-width="formLabelWidth">
+  <el-input v-model="form.classId" autocomplete="off"></el-input>
+</el-form-item> -->
             <el-form-item label="班级名称" :label-width="formLabelWidth">
               <el-input v-model="form.className" autocomplete="off"></el-input>
             </el-form-item>
           </el-form>
           <div slot="footer" class="dialog-footer">
             <el-button @click="classEditDialog = false">取 消</el-button>
-            <el-button type="primary" @click="classEditDialog = false">确 定</el-button>
+            <el-button type="primary" @click="submitform">确 定</el-button>
           </div>
         </el-dialog>
       </div>
@@ -151,16 +151,16 @@
         </el-table>
         <el-dialog title="编辑小组信息" :visible.sync="groupEditDialog">
           <el-form :model="form">
-            <el-form-item label="小组代码" :label-width="formLabelWidth">
-              <el-input v-model="form.groupId" autocomplete="off"></el-input>
-            </el-form-item>
+<!--             <el-form-item label="小组代码" :label-width="formLabelWidth">
+  <el-input v-model="form.groupId" autocomplete="off"></el-input>
+</el-form-item> -->
             <el-form-item label="小组名称" :label-width="formLabelWidth">
               <el-input v-model="form.groupName" autocomplete="off"></el-input>
             </el-form-item>
           </el-form>
           <div slot="footer" class="dialog-footer">
             <el-button @click="groupEditDialog = false">取 消</el-button>
-            <el-button type="primary" @click="groupEditDialog = false">确 定</el-button>
+            <el-button type="primary" @click="submitform">确 定</el-button>
           </div>
         </el-dialog>
       </div>
@@ -195,9 +195,9 @@
         </el-table>
         <el-dialog title="编辑学生信息" :visible.sync="studentEditDialog">
           <el-form :model="form">
-            <el-form-item label="学生代码" :label-width="formLabelWidth">
-              <el-input v-model="form.studentId" autocomplete="off"></el-input>
-            </el-form-item>
+<!--             <el-form-item label="学生代码" :label-width="formLabelWidth">
+  <el-input v-model="form.studentId" autocomplete="off"></el-input>
+</el-form-item> -->
             <el-form-item label="学生姓名" :label-width="formLabelWidth">
               <el-input v-model="form.studentName" autocomplete="off"></el-input>
             </el-form-item>
@@ -265,24 +265,27 @@ export default {
     };
   },
   created() {
-    this.getList(1);
+    this.getList();
   },
   mounted() {},
   methods: {
     handlechange(){
-      this.getList(this.value);
+      this.getList();
     },
     submitform(){
       let url;
+      console.log(this.type);
       if (this.type == 1) {
         url = this.api.setTeacherInfo;
       } else if (this.type == 2){
         url = this.api.setClassInfo;
       }else if (this.type == 3){
+        this.form.classId = null;
         url = this.api.setGroupInfo;
       }else if (this.type == 4){
         url = this.api.setStudentInfo;
       }
+      console.log(url);
       this.http(url, this.form).then(res => {
         if (res.data.code == "0000") {
           this.getList();
