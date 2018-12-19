@@ -17,6 +17,7 @@
         <el-button
           icon="el-icon-document"
           size="mini"
+          type="primary"
           @click="addDetectionDetail"
           :disabled="disabled"
         >布置</el-button>

@@ -7,7 +7,7 @@
         <el-button size="mini" icon="el-icon-edit" @click="editTitle" circle></el-button>
       </div>
       <div class="back">
-        <el-button icon="el-icon-back" size="mini" @click="back">返回</el-button>
+        <el-button icon="el-icon-back" size="mini" @click="back"   type="primary">返回</el-button>
       </div>
     </div>
     <div class="mainbody">
@@ -274,13 +274,9 @@ export default {
         font-size: 14px;
         font-family: PingFang-SC-Regular;
         font-weight: bold;
-        color: rgba(138, 138, 138, 1);
+        // color: rgba(138, 138, 138, 1);
       }
-      .el-button:hover {
-        color: #8de1bc;
-        border-color: none;
-        background-color: #8de1bc;
-      }
+     
     }
     .el-collapse-item {
       margin-bottom: 8px;

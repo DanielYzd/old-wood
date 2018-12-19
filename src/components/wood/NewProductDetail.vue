@@ -7,7 +7,7 @@
         <el-button size="mini" icon="el-icon-edit" @click="editTitle()" circle></el-button>
       </div>
       <div class="back">
-        <el-button icon="el-icon-back" size="mini" @click="back">返回</el-button>
+        <el-button icon="el-icon-back" size="mini" @click="back"   type="primary" >返回</el-button>
       </div>
     </div>
     <div class="mainbody">
