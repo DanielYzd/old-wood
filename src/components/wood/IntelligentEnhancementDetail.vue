@@ -3,7 +3,9 @@
     <div class="child_head">
       <div class="block"></div>
       <div class="child_title">关于书签制作的智能加强的内容管理</div>
-      <el-button icon="el-icon-back" size="mini" @click="back">返回</el-button>
+      <div class="back">
+        <el-button icon="el-icon-back" size="mini" @click="back">返回</el-button>
+      </div>
     </div>
     <div class="mainbody">
       <el-collapse v-model="activeNames">
@@ -73,7 +75,7 @@ export default {
       process: "",
       notice: "",
       other: "",
-      activeNames: ["1","2","3","4"],
+      activeNames: ["1", "2", "3", "4"],
       childcontent: "",
       dialogVisible: false,
       hackReset: true,

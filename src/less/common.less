@@ -3,29 +3,28 @@ body {
   margin: 0;
   height: 100%;
   padding: 0;
-  .pswp{
-    z-index:3000;
+  .pswp {
+    z-index: 3000;
   }
 }
 .child_head {
+  background-color: #ffffff;
   height: 43px;
   margin-bottom: 8px;
-  background-color: #ffffff;
   line-height: 43px;
-  vertical-align: middle;
+  position: relative;
   .block {
-    float: left;
+    display: inline-block;
     width: 17px;
-    height: 19px;
+    height: 17px;
     background: rgba(141, 225, 188, 1);
     margin-left: 10px;
     vertical-align: middle;
-    margin-top: 10px;
   }
   .child_title {
-    width:70%;
-    float: left;
-    margin-left: 20px;
+    vertical-align: middle;
+    display: inline-block;
+    margin-left: 10px;
     font-size: 16px;
     font-family: PingFang-SC-Medium;
     font-weight: bold;
@@ -35,17 +34,46 @@ body {
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-  .el-button {
-    float: right;
-    margin-top: 10px;
+  .edit{
+    vertical-align: middle;
+    display: inline-block;
+    margin-left:20px;
+  }
+  .class{
+    position: absolute;
+    right: 0;
+    margin-right: 130px;
+    vertical-align: middle;
+    display: inline-block;
+    width:130px;
+    
+  }
+  .buzhi{
+    position: absolute;
+    right: 0;
     margin-right: 20px;
-    width: 76px;
-    height: 26px;
-    background: rgba(141, 225, 188, 1);
-    border: 1px solid rgba(89, 200, 151, 1);
-    border-radius: 5px;
-    color: #ffffff;
-    font-size: 14px;
+    vertical-align: middle;
+    display: inline-block;
+    .el-button{
+      background: rgba(141, 225, 188, 1);
+      border: 1px solid rgba(89, 200, 151, 1);
+      border-radius: 5px;
+      color: #ffffff;
+      font-size: 14px;
+    }
+  }
+  .back {
+    display: inline-block;
+    position: absolute;
+    right: 0;
+    margin-right: 20px;
+    .el-button {
+      background: rgba(141, 225, 188, 1);
+      border: 1px solid rgba(89, 200, 151, 1);
+      border-radius: 5px;
+      color: #ffffff;
+      font-size: 14px;
+    }
   }
 }
 .el-icon-miaoshu {
@@ -56,17 +84,17 @@ body {
 .content {
   padding: 0 40px 40px 40px;
 }
-.full{
+.full {
   display: inline-block;
-  width:17px;
-  height:16px;
-  background: url(../assets/shixin.png)  no-repeat;
+  width: 17px;
+  height: 16px;
+  background: url(../assets/shixin.png) no-repeat;
 }
-.empty{
+.empty {
   display: inline-block;
-  width:17px;
-  height:16px;
-  background: url(../assets/kongxin.png)  no-repeat;
+  width: 17px;
+  height: 16px;
+  background: url(../assets/kongxin.png) no-repeat;
 }
 .vediodialog {
   .el-dialog__header {
@@ -86,7 +114,7 @@ body {
     height: 600px;
   }
 }
- .moviedialog {
+.moviedialog {
   .el-dialog__header {
     //  height:0px;
     text-align: center;

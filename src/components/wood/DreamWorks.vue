@@ -2,7 +2,7 @@
   <div class="DreamWorks">
     <div class="child_head">
       <div class="block"></div>
-      <div class="child_title">关于书签制作的学生创意的具体实现</div>
+      <div class="child_title">{{title}}</div>
     </div>
     <div class="mainbody">
       <div class="maintitle">
@@ -43,18 +43,27 @@ export default {
     return {
       data: [],
       classList: [],
-      value: ""
+      value: "",
+      title: ""
     };
   },
   mounted() {
-     this.getClassList();
+    this.getClassList();
+  },
+  created() {
+    let body = {
+      functionId: "0102008"
+    };
+    this.http(this.api.getFunctionDesc, body).then(res => {
+      this.title = res.data.data;
+    });
   },
   methods: {
- change() {
+    change() {
       this.getDreamList(this.value);
     },
     getDreamList(classId) {
-     let body = {
+      let body = {
         courseId: window.localStorage.getItem("courseId"),
         classId: classId
       };
@@ -64,7 +73,7 @@ export default {
         }
       });
     },
-     getClassList() {
+    getClassList() {
       this.http(this.api.getClassList).then(res => {
         if (res.data.code == "0000") {
           this.classList = res.data.data;
@@ -81,7 +90,7 @@ export default {
       });
     },
     watch(id) {
-       this.$router.push({
+      this.$router.push({
         path: `/DreamWorksDetail/${id}`
       });
     }

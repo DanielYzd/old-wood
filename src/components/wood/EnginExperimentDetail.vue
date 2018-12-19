@@ -3,7 +3,10 @@
     <div class="child_head">
       <div class="block"></div>
       <div class="child_title">关于书签制作的实验内容和执行情况</div>
-      <el-button icon="el-icon-back" size="mini" @click="back">返回</el-button>
+      <div class="back">
+          <el-button icon="el-icon-back" size="mini" @click="back">返回</el-button>
+      </div>
+      
     </div>
     <div class="mainbody">
       <el-collapse v-model="activeNames">

@@ -2,7 +2,10 @@
   <div class="KnowledgeHint">
     <div class="child_head">
       <div class="block"></div>
-      <div class="child_title">关于书签制作的知识点提示</div>
+      <div class="child_title">{{title}}</div>
+       <div class="edit">
+        <el-button size="mini" icon="el-icon-edit" circle></el-button>
+      </div>
     </div>
     <div class="mainbody">
       <el-collapse v-model="activeNames" @change="handleChange">
@@ -87,11 +90,18 @@ export default {
       childcontent: "",
       dialogVisible: false,
       hackReset: true,
-      tag: ""
+      tag: "",
+      title:''
     };
   },
   created() {
     this.getknowledge();
+     let body = {
+      functionId: "0102004"
+    };
+    this.http(this.api.getFunctionDesc, body).then(res => {
+      this.title = res.data.data;
+    });
   },
   methods: {
     getknowledge() {

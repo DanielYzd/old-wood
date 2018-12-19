@@ -3,7 +3,9 @@
     <div class="child_head">
       <div class="block"></div>
       <div class="child_title">关于书签制作的全科阅读的内容管理，以及学生阅读点评，增强互动</div>
-      <el-button icon="el-icon-back" size="mini" @click="back">返回</el-button>
+      <div class="back">
+        <el-button icon="el-icon-back" size="mini" @click="back">返回</el-button>
+      </div>
     </div>
     <div class="mainbody">
       <el-collapse v-model="activeNames">
@@ -88,7 +90,7 @@ export default {
       process: "",
       notice: "",
       other: "",
-      activeNames: ["1","2"],
+      activeNames: ["1", "2"],
       childcontent: "",
       dialogVisible: false,
       hackReset: true,

@@ -1,9 +1,11 @@
 <template>
   <div class="DreamWorksDetail">
     <div class="child_head">
-      <div class="block"></div>
-      <div class="child_title">关于书签制作的学生创意的具体过程</div>
-      <el-button icon="el-icon-back" size="mini" @click="back">返回</el-button>
+      <span class="block"></span>
+      <span class="child_title">关于书签制作的学生创意的具体过程</span>
+      <div class="back">
+        <el-button icon="el-icon-back" size="mini" @click="back">返回</el-button>
+      </div>
     </div>
     <div class="mainbody">
       <el-collapse v-model="activeNames" @change="handleChange">
@@ -100,20 +102,6 @@ export default {
 <style lang="less" scoped>
 .DreamWorksDetail {
   width: 100%;
-  .child_head {
-    .el-button {
-      float: right;
-      margin-top: 10px;
-      margin-right: 20px;
-      width: 76px;
-      height: 26px;
-      background: rgba(141, 225, 188, 1);
-      border: 1px solid rgba(89, 200, 151, 1);
-      border-radius: 5px;
-      color: #ffffff;
-      font-size: 14px;
-    }
-  }
   .mainbody {
     height: calc(100% - 51px);
     // background-color: #ffffff;

@@ -2,7 +2,10 @@
   <div class="CreativeDesign">
     <div class="child_head">
       <div class="block"></div>
-      <div class="child_title">书签制作的模仿视频，一般是多个步骤。</div>
+      <div class="child_title">{{title}}</div>
+       <div class="edit">
+        <el-button size="mini" icon="el-icon-edit" circle></el-button>
+      </div>
     </div>
     <div class="mainbody">
       <div class="maintitle">
@@ -46,11 +49,20 @@ export default {
     return {
       data: [],
       classList: [],
-      value: ""
+      value: "",
+      title:''
     };
   },
   mounted() {
     this.getClassList();
+  },
+   created(){
+     let body = {
+      functionId: "0102003"
+    };
+    this.http(this.api.getFunctionDesc, body).then(res => {
+      this.title = res.data.data;
+    });
   },
   methods: {
     change() {

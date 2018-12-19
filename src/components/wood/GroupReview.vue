@@ -2,7 +2,7 @@
   <div class="GroupReview">
     <div class="child_head">
       <div class="block"></div>
-      <div class="child_title">关于书签制作的全过程评价，以小组为单位</div>
+      <div class="child_title">{{title}}</div>
     </div>
     <div class="mainbody">
       <div class="maintitle">
@@ -127,11 +127,20 @@ export default {
       showVisible: false,
       scoreDetailList: [],
       totalScore: "",
-      studentName: ""
+      studentName: "",
+      title:''
     };
   },
   mounted() {
     this.getClassList();
+  },
+   created(){
+     let body = {
+      functionId: "0102010"
+    };
+    this.http(this.api.getFunctionDesc, body).then(res => {
+      this.title = res.data.data;
+    });
   },
   methods: {
     change() {

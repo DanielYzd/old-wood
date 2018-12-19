@@ -2,7 +2,10 @@
   <div class="GeneralReading">
     <div class="child_head">
       <div class="block"></div>
-      <div class="child_title">提供脑图给学生使用</div>
+      <span class="child_title">{{simpleTitle}}</span>
+      <div class="edit">
+        <el-button size="mini" icon="el-icon-edit" circle></el-button>
+      </div>
     </div>
     <div class="mainbody">
       <div class="top">
@@ -65,7 +68,7 @@
         top="15vh"
       >
         <template slot="title">{{title}}</template>
-        <div  v-html="content">{{content}}</div>
+        <div v-html="content">{{content}}</div>
       </el-dialog>
       <el-dialog
         :visible.sync="dialogVisible"
@@ -96,12 +99,21 @@ export default {
       content: "",
       title: "",
       hackReset: false,
-      mindId:'',
+      mindId: "",
+      simpleTitle: ""
     };
   },
   mounted() {
     this.getMindList();
     this.getMindDetailList();
+  },
+  created() {
+    let body = {
+      functionId: "0102012"
+    };
+    this.http(this.api.getFunctionDesc, body).then(res => {
+      this.simpleTitle = res.data.data;
+    });
   },
   methods: {
     del(mindId) {
@@ -155,7 +167,7 @@ export default {
       });
     },
     edit(mindId) {
-      this.mindId=mindId;
+      this.mindId = mindId;
       let body = {
         mindId: mindId
       };
@@ -170,26 +182,26 @@ export default {
         }
       });
     },
-    setMind(content){
-      let body={
-        mindId:this.mindId,
-        content:content
-      }
-      this.http(this.api.setMind,body).then(res=>{
-          if(res.data.code=="0000"){
-            this.$message({
-              type:'success',
-              message:'操作成功！'
-            })
-          }
-      })
+    setMind(content) {
+      let body = {
+        mindId: this.mindId,
+        content: content
+      };
+      this.http(this.api.setMind, body).then(res => {
+        if (res.data.code == "0000") {
+          this.$message({
+            type: "success",
+            message: "操作成功！"
+          });
+        }
+      });
     },
-     childByValue: function(childValue) {
+    childByValue: function(childValue) {
       // childValue就是子组件传过来的值
       // this.content = childValue;
       switch (this.tag) {
         case 1:
-         this.setMind(childValue);
+          this.setMind(childValue);
           break;
       }
       this.hackReset = false;

@@ -11,7 +11,7 @@ export default {
   name: "Header",
   data() {
     return {
-      userName: window.localStorage.getItem('userName')
+      userName: window.localStorage.getItem("userName")
     };
   },
   methods: {
@@ -38,6 +38,9 @@ export default {
     font-family: PingFang-SC-Bold;
     font-weight: bold;
     color: rgba(51, 51, 51, 1);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   .loginout {
     cursor: pointer;

@@ -3,7 +3,9 @@
     <div class="child_head">
       <div class="block"></div>
       <div class="child_title">查看学生关于书签制作的创意内容</div>
-      <el-button icon="el-icon-back" size="mini" @click="back">返回</el-button>
+      <div class="back">
+        <el-button icon="el-icon-back" size="mini" @click="back">返回</el-button>
+      </div>
     </div>
     <div class="mainbody">
       <el-collapse v-model="activeNames" @change="handleChange">
@@ -12,7 +14,6 @@
             <div class="title">
               <img src="../../assets/create.png" alt>
               <span>创意构图</span>
-             
             </div>
           </template>
           <div class="content" v-html="idea">{{idea}}</div>
@@ -22,20 +23,18 @@
             <div class="title">
               <img src="../../assets/create.png" alt>
               <span>创意表达</span>
-             
             </div>
           </template>
-        <div class="content" v-html="express">{{express}}</div>
+          <div class="content" v-html="express">{{express}}</div>
         </el-collapse-item>
         <el-collapse-item name="3">
           <template slot="title">
             <div class="title">
               <img src="../../assets/jiaoliu.png" alt>
               <span>同桌交流启示</span>
-             
             </div>
           </template>
-         <div class="content" v-html="enlightenment">{{enlightenment}}</div>
+          <div class="content" v-html="enlightenment">{{enlightenment}}</div>
         </el-collapse-item>
       </el-collapse>
     </div>
@@ -45,10 +44,10 @@
 export default {
   data() {
     return {
-      activeNames: ["1","2","3"],
+      activeNames: ["1", "2", "3"],
       idea: "",
-      express:'',
-      enlightenment:''
+      express: "",
+      enlightenment: ""
     };
   },
   mounted() {
@@ -65,8 +64,8 @@ export default {
           let data = res.data.data;
           if (data) {
             this.idea = data.idea;
-            this.express=data.express;
-            this.enlightenment=data.enlightenment;
+            this.express = data.express;
+            this.enlightenment = data.enlightenment;
           }
         }
       });

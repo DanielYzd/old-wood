@@ -2,7 +2,7 @@
   <div class="GeneralReading">
     <div class="child_head">
       <div class="block"></div>
-      <div class="child_title">关于书签制作的全科阅读的内容管理，以及学生阅读点评，增强互动</div>
+      <div class="child_title">{{title}}</div>
     </div>
     <div class="mainbody">
       <div class="top">
@@ -25,11 +25,20 @@
 export default {
   data() {
     return {
-      data: []
+      data: [],
+      title:''
     };
   },
   mounted() {
     this.getRefernenceList();
+  },
+   created(){
+     let body = {
+      functionId: "0102006"
+    };
+    this.http(this.api.getFunctionDesc, body).then(res => {
+      this.title = res.data.data;
+    });
   },
   methods: {
     view(id) {

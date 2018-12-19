@@ -2,7 +2,7 @@
   <div class="EnginExperiment">
     <div class="child_head">
       <div class="block"></div>
-      <div class="child_title">关于书签制作的工程实验，老师设计，学生可选实验</div>
+      <div class="child_title">{{title}}</div>
     </div>
     <div class="mainbody">
       <div class="maintitle">
@@ -37,11 +37,20 @@
 export default {
   data() {
     return {
-      data: []
+      data: [],
+      title:''
     };
   },
   mounted() {
     this.getExperimentList();
+  },
+   created(){
+     let body = {
+      functionId: "0102005"
+    };
+    this.http(this.api.getFunctionDesc, body).then(res => {
+      this.title = res.data.data;
+    });
   },
   methods: {
     disabled(status) {

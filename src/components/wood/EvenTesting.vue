@@ -2,19 +2,21 @@
   <div class="EvenTesting">
     <div class="child_head">
       <div class="block"></div>
-      <div class="child_title">关于书签制作的知识检测，以小组为单位答题</div>
+      <div class="child_title">{{title}}</div>
+      <div class="class">
+         <el-select v-model="value" placeholder="选择班级" size="mini" @change="handlechange">
+        <el-option
+          v-for="item in classList"
+          :key="item.classId"
+          :label="item.className"
+          :value="item.classId"
+        ></el-option>
+      </el-select>
+      </div>
       <div class="buzhi">
-        <el-select v-model="value" placeholder="选择班级" size="mini" @change="handlechange">
-          <el-option
-            v-for="item in classList"
-            :key="item.classId"
-            :label="item.className"
-            :value="item.classId"
-          ></el-option>
-        </el-select>
         <el-button
           icon="el-icon-document"
-          style="padding:0"
+         size="mini"
           @click="addDetectionDetail"
           :disabled="disabled"
         >布置</el-button>
@@ -42,7 +44,7 @@
             </div>
           </template>
           <div v-html="content2" class="content">{{content2}}</div>
-           <div class="answer">正确答案：{{answer2}}</div>
+          <div class="answer">正确答案：{{answer2}}</div>
         </el-collapse-item>
         <el-collapse-item name="3">
           <template slot="title">
@@ -119,7 +121,7 @@ export default {
       classList: [],
       value: "",
       disabled: false,
-      activeNames: ["1","2","3","4","5","6"],
+      activeNames: ["1", "2", "3", "4", "5", "6"],
       dialogVisible: false,
       hackReset: true,
       tag: "",
@@ -136,12 +138,21 @@ export default {
       answer3: "",
       answer4: "",
       answer5: "",
-      answer6: ""
+      answer6: "",
+      title: ""
     };
   },
   mounted() {
     this.getAllDetection();
     this.getClassList();
+  },
+  created() {
+    let body = {
+      functionId: "0102009"
+    };
+    this.http(this.api.getFunctionDesc, body).then(res => {
+      this.title = res.data.data;
+    });
   },
   methods: {
     handlechange() {

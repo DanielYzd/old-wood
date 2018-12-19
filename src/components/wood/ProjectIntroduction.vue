@@ -2,7 +2,10 @@
   <div class="projecintro">
     <div class="child_head">
       <div class="block"></div>
-      <div class="child_title">书签制作的介绍，以及该项目在本校的教学课程分析、排课情况。对于内容在平台的基础上可以修改编辑.</div>
+      <div class="child_title">{{title}}</div>
+       <div class="edit">
+        <el-button size="mini" icon="el-icon-edit" circle></el-button>
+      </div>
     </div>
     <div class="body">
       <div class="top">
@@ -59,20 +62,28 @@ export default {
       childcontent: "",
       dialogVisible: false,
       hackReset: true,
-      tag: ""
+      tag: "",
+      title:""
     };
   },
   created() {
     this.getFieldBydescription();
     this.getFieldBymaterial();
     this.getFieldByexperiment();
+
+    let body = {
+      functionId: "0102001"
+    };
+    this.http(this.api.getFunctionDesc, body).then(res => {
+      this.title = res.data.data;
+    });
   },
   methods: {
     getFieldBydescription() {
       let body = {
         tableName: "tbl_school_course",
         fieldName: "description",
-        courseId: window.localStorage.getItem('courseId')
+        courseId: window.localStorage.getItem("courseId")
       };
       this.http(this.api.getField, body).then(res => {
         this.content1 = res.data.data;
@@ -82,7 +93,7 @@ export default {
       let body = {
         tableName: "tbl_school_course",
         fieldName: "material",
-         courseId: window.localStorage.getItem('courseId')
+        courseId: window.localStorage.getItem("courseId")
       };
       this.http(this.api.getField, body).then(res => {
         this.content2 = res.data.data;
@@ -92,7 +103,7 @@ export default {
       let body = {
         tableName: "tbl_school_course",
         fieldName: "experiment",
-        courseId: window.localStorage.getItem('courseId')
+        courseId: window.localStorage.getItem("courseId")
       };
       this.http(this.api.getField, body).then(res => {
         this.content3 = res.data.data;
@@ -102,7 +113,7 @@ export default {
       let body = {
         tableName: "tbl_school_course",
         fieldName: fieldName,
-        courseId: window.localStorage.getItem('courseId'),
+        courseId: window.localStorage.getItem("courseId"),
         data: data
       };
       this.http(this.api.setField, body).then(res => {

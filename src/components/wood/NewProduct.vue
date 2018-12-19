@@ -2,7 +2,7 @@
   <div class="NewProduct">
     <div class="child_head">
       <div class="block"></div>
-      <div class="child_title">以全班为对象，对小组的作品进行评比和推广</div>
+      <div class="child_title">{{title}}</div>
     </div>
     <div class="mainbody">
       <div class="maintitle">
@@ -31,11 +31,20 @@
 export default {
   data() {
     return {
-      data: []
+      data: [],
+      title:""
     };
   },
   mounted() {
     this.getPopularizeList();
+  },
+   created(){
+     let body = {
+      functionId: "0102011"
+    };
+    this.http(this.api.getFunctionDesc, body).then(res => {
+      this.title = res.data.data;
+    });
   },
   methods: {
     getPopularizeList() {

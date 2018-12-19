@@ -2,7 +2,7 @@
   <div class="IntelligentEnhancement">
     <div class="child_head">
       <div class="block"></div>
-      <div class="child_title">关于书签制作的增加智能性、趣味性</div>
+      <div class="child_title">{{title}}</div>
     </div>
     <div class="mainbody">
       <div class="maintitle">
@@ -32,11 +32,20 @@
 export default {
   data() {
     return {
-      data: []
+      data: [],
+      title:''
     };
   },
   mounted() {
     this.getIntelligenteList();
+  },
+   created(){
+     let body = {
+      functionId: "0102007"
+    };
+    this.http(this.api.getFunctionDesc, body).then(res => {
+      this.title = res.data.data;
+    });
   },
   methods: {
     view(id) {
