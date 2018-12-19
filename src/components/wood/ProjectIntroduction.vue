@@ -3,9 +3,6 @@
     <div class="child_head">
       <div class="block"></div>
       <div class="child_title">{{title}}</div>
-       <div class="edit">
-        <el-button size="mini" icon="el-icon-edit" circle></el-button>
-      </div>
     </div>
     <div class="body">
       <div class="top">
@@ -63,22 +60,24 @@ export default {
       dialogVisible: false,
       hackReset: true,
       tag: "",
-      title:""
+      title: ""
     };
   },
   created() {
     this.getFieldBydescription();
     this.getFieldBymaterial();
     this.getFieldByexperiment();
-
-    let body = {
-      functionId: "0102001"
-    };
-    this.http(this.api.getFunctionDesc, body).then(res => {
-      this.title = res.data.data;
-    });
+    this.getFunctionDesc();
   },
   methods: {
+    getFunctionDesc() {
+      let body = {
+        functionId: "0102001"
+      };
+      this.http(this.api.getFunctionDesc, body).then(res => {
+        this.title = res.data.data;
+      });
+    },
     getFieldBydescription() {
       let body = {
         tableName: "tbl_school_course",

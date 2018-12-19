@@ -21,7 +21,7 @@
             </div>
           </div>
 
-          <el-button type="text" @click="watch(item.experimentId)">查看</el-button>
+          <el-button type="text" @click="watch(item.experimentId,item.simpleTitle)">查看</el-button>
           <!-- <el-button type="text">编辑</el-button> -->
           <el-button
             type="text"
@@ -61,9 +61,9 @@ export default {
         return false;
       }
     },
-    watch(id) {
+    watch(id,title) {
       this.$router.push({
-        path: `/EnginExperimentDetail/${id}`
+        path: `/EnginExperimentDetail/${id}/${title}`
       });
     },
     addExperimentDetail(experimentId) {

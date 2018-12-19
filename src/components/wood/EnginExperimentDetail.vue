@@ -2,11 +2,13 @@
   <div class="EnginExperimentDetail">
     <div class="child_head">
       <div class="block"></div>
-      <div class="child_title">关于书签制作的实验内容和执行情况</div>
-      <div class="back">
-          <el-button icon="el-icon-back" size="mini" @click="back">返回</el-button>
+      <div class="child_title">{{title}}</div>
+      <div class="edit">
+        <el-button size="mini" icon="el-icon-edit" @click="editTitle" circle></el-button>
       </div>
-      
+      <div class="back">
+        <el-button icon="el-icon-back" size="mini" @click="back">返回</el-button>
+      </div>
     </div>
     <div class="mainbody">
       <el-collapse v-model="activeNames">
@@ -88,6 +90,25 @@
         <div class="content2">{{content2}}</div>
       </el-dialog>
     </div>
+      <div class="editTtitle">
+      <el-dialog title="修改标题" :visible.sync="editvisible">
+        <el-form ref="form" label-width="80px">
+          <el-form-item label="标题">
+            <el-input v-model="title2"></el-input>
+          </el-form-item>
+          <el-form-item label="简写标题">
+            <el-input v-model="simpletitle"></el-input>
+          </el-form-item>
+          <el-form-item label="图片地址">
+            <el-input v-model="url"></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="onSubmit">保存</el-button>
+            <el-button @click="editvisible=false">取消</el-button>
+          </el-form-item>
+        </el-form>
+      </el-dialog>
+    </div>
   </div>
 </template>
 <script>
@@ -102,10 +123,14 @@ export default {
       content2: "",
       experimentDetailId: "",
       title: "",
+      title2:'',
+      url:'',
+      simpletitle:'',
       experimentList: [],
-      activeNames: ["1","2"],
+      activeNames: ["1", "2"],
       childcontent: "",
       dialogVisible: false,
+      editvisible:false,
       showVisible: false,
       hackReset: true,
       tag: ""
@@ -116,6 +141,28 @@ export default {
     this.getExperimentDetailList();
   },
   methods: {
+     editTitle() {
+      this.editvisible = true;
+      this.title2 = this.title;
+      this.simpletitle = this.$route.params.title;
+    },
+     onSubmit() {
+      let body = {
+        idName: "experimentId",
+        idValue: this.$route.params.id,
+        picUrl: this.url,
+        tableName: "tbl_school_experiment",
+        title: this.title2,
+        simpleTitle: this.simpletitle
+      };
+      this.http(this.api.setTitleByID, body).then(res => {
+        if (res.data.code === "0000") {
+          this.$message.success("操作成功");
+          this.editvisible = false;
+          this.getExperiment();
+        }
+      });
+    },
     record(experimentRecord) {
       this.showVisible = true;
       this.content2 = experimentRecord;
@@ -134,6 +181,7 @@ export default {
         if (res.data.code == "0000") {
           let data = res.data.data;
           this.content = data.content;
+          this.title=data.title;
         }
       });
     },

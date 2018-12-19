@@ -3,15 +3,11 @@
     <div class="child_head">
       <div class="block"></div>
       <div class="child_title">{{title}}</div>
-       <div class="edit">
-        <el-button size="mini" icon="el-icon-edit" circle></el-button>
-      </div>
     </div>
     <div class="mainbody">
       <div class="maintitle">
         <img src="../../assets/create.png" alt>
         <div class="suspro">创意设计</div>
-
         <el-select
           class="select"
           v-model="value"
@@ -32,12 +28,10 @@
         <img :src="item.picUrl" class="image">
         <div class="detail">
           <div class="time">
-            <span style="font-size:18px;weight:bold;color:#2B4A7E">{{item.simpleTitle}}</span>
-            <span
-              style="font-size:12px;font-weight:bold;color:#666666;margin-left:80px;"
-            >作者：{{item.studentName}}</span>
+            <span class="simpleTitle">{{item.simpleTitle}}</span>
+            <span class="studentName">作者：{{item.studentName}}</span>
           </div>
-          <el-button type="text" @click="see(item.designId)">查看</el-button>
+          <el-button type="text" @click="see(item.designId,item.simpleTitle)">查看</el-button>
         </div>
       </el-card>
     </div>
@@ -50,14 +44,14 @@ export default {
       data: [],
       classList: [],
       value: "",
-      title:''
+      title: ""
     };
   },
   mounted() {
     this.getClassList();
   },
-   created(){
-     let body = {
+  created() {
+    let body = {
       functionId: "0102003"
     };
     this.http(this.api.getFunctionDesc, body).then(res => {
@@ -95,9 +89,9 @@ export default {
         }
       });
     },
-    see(id) {
+    see(id, simpleTitle) {
       this.$router.push({
-        path: `/CreativeDesignDetail/${id}`
+        path: `/CreativeDesignDetail/${id}/${simpleTitle}`
       });
     }
   }
@@ -130,10 +124,10 @@ export default {
         font-weight: bold;
         color: rgba(51, 51, 51, 1);
       }
-      .class{
+      .class {
         float: right;
         vertical-align: middle;
-        height:30px;
+        height: 30px;
         line-height: 30px;
         font-size: 14px;
         font-weight: bold;
@@ -170,15 +164,19 @@ export default {
       .detail {
         padding: 8px;
         .time {
-          clear: both;
-          vertical-align: middle;
+          height: 50px;
+          line-height: 50px;
           border-bottom: 1px solid #e5e5e5;
-          padding-bottom: 5px;
-          margin-top: 10px;
-          span {
-            height: 100%;
-            vertical-align: middle;
-            display: inline-block;
+          .simpleTitle {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2b4a7e;
+          }
+          .studentName {
+            font-size: 12px;
+            font-weight: bold;
+            color: #666666;
+            float: right;
           }
         }
         .el-button {

@@ -2,7 +2,10 @@
   <div class="DreamWorksDetail">
     <div class="child_head">
       <span class="block"></span>
-      <span class="child_title">关于书签制作的学生创意的具体过程</span>
+      <span class="child_title">{{title}}</span>
+      <div class="edit">
+        <el-button size="mini" icon="el-icon-edit" @click="editTitle" circle></el-button>
+      </div>
       <div class="back">
         <el-button icon="el-icon-back" size="mini" @click="back">返回</el-button>
       </div>
@@ -48,6 +51,25 @@
         </el-collapse-item>
       </el-collapse>
     </div>
+     <div class="editTtitle">
+      <el-dialog title="修改标题" :visible.sync="editvisible">
+        <el-form ref="form" label-width="80px">
+          <el-form-item label="标题">
+            <el-input v-model="title2"></el-input>
+          </el-form-item>
+          <el-form-item label="简写标题">
+            <el-input v-model="simpletitle"></el-input>
+          </el-form-item>
+          <el-form-item label="图片地址">
+            <el-input v-model="url"></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="onSubmit">保存</el-button>
+            <el-button @click="editvisible=false">取消</el-button>
+          </el-form-item>
+        </el-form>
+      </el-dialog>
+    </div>
   </div>
 </template>
 <script>
@@ -59,7 +81,12 @@ export default {
       statusB: false,
       statusC: false,
       experience: "",
-      designModify: ""
+      designModify: "",
+      title: "",
+      title2: "",
+      url: "",
+      simpletitle: "",
+      editvisible: false
     };
   },
   mounted() {
@@ -67,6 +94,28 @@ export default {
     console.log(this.status == "A");
   },
   methods: {
+     editTitle() {
+      this.editvisible = true;
+      this.title2 = this.title;
+      this.simpletitle = this.$route.params.title;
+    },
+     onSubmit() {
+      let body = {
+        idName: "dreamId",
+        idValue: this.$route.params.id,
+        picUrl: this.url,
+        tableName: "tbl_school_dream",
+        title: this.title2,
+        simpleTitle: this.simpletitle
+      };
+      this.http(this.api.setTitleByID, body).then(res => {
+        if (res.data.code === "0000") {
+          this.$message.success("操作成功");
+          this.editvisible = false;
+          this.getDream();
+        }
+      });
+    },
     getDream() {
       let body = {
         dreamId: this.$route.params.id
@@ -87,6 +136,7 @@ export default {
           }
           this.experience = res.data.data.experience;
           this.designModify = res.data.data.designModify;
+          this.title=res.data.data.title;
         }
       });
     },

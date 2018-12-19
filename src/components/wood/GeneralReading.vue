@@ -14,7 +14,7 @@
           <img src="../../assets/1111.png" class="image">
           <div class="detail">
             <span>{{item.simpleTitle}}</span>
-            <el-button icon="el-icon-edit" @click="view(item.refernenceId)">编辑</el-button>
+            <el-button icon="el-icon-edit" @click="view(item.refernenceId,item.simpleTitle)">编辑</el-button>
           </div>
         </el-card>
       </div>
@@ -41,9 +41,9 @@ export default {
     });
   },
   methods: {
-    view(id) {
+    view(id,title) {
       this.$router.push({
-        path: `/GeneralReadingDetail/${id}`
+        path: `/GeneralReadingDetail/${id}/${title}`
       });
     },
     getRefernenceList() {

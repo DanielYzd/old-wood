@@ -31,7 +31,7 @@
             <span style="font-size:18px;weight:bold;color:#2B4A7E">{{item.simpleTitle}}</span>
             <div style="font-size:12px;font-weight:bold;color:#666666;">作者：{{item.studentName}}</div>
           </div>
-          <el-button type="text" @click="watch(item.dreamId)">查看</el-button>
+          <el-button type="text" @click="watch(item.dreamId,item.simpleTitle)">查看</el-button>
         </div>
       </el-card>
     </div>
@@ -89,9 +89,9 @@ export default {
         }
       });
     },
-    watch(id) {
+    watch(id,title) {
       this.$router.push({
-        path: `/DreamWorksDetail/${id}`
+        path: `/DreamWorksDetail/${id}/${title}`
       });
     }
   }

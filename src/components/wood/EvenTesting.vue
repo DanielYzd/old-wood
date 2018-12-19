@@ -4,19 +4,19 @@
       <div class="block"></div>
       <div class="child_title">{{title}}</div>
       <div class="class">
-         <el-select v-model="value" placeholder="选择班级" size="mini" @change="handlechange">
-        <el-option
-          v-for="item in classList"
-          :key="item.classId"
-          :label="item.className"
-          :value="item.classId"
-        ></el-option>
-      </el-select>
+        <el-select v-model="value" placeholder="选择班级" size="mini" @change="handlechange">
+          <el-option
+            v-for="item in classList"
+            :key="item.classId"
+            :label="item.className"
+            :value="item.classId"
+          ></el-option>
+        </el-select>
       </div>
       <div class="buzhi">
         <el-button
           icon="el-icon-document"
-         size="mini"
+          size="mini"
           @click="addDetectionDetail"
           :disabled="disabled"
         >布置</el-button>
@@ -194,19 +194,22 @@ export default {
       this.http(this.api.getAllDetection, body).then(res => {
         if (res.data.code == "0000") {
           let data = res.data.data;
-          this.content1 = data.content1;
-          this.content2 = data.content2;
-          this.content3 = data.content3;
-          this.content4 = data.content4;
-          this.content5 = data.content5;
-          this.content6 = data.content6;
-          this.answer1 = data.answer1;
-          this.answer2 = data.answer2;
-          this.answer3 = data.answer3;
-          this.answer4 = data.answer4;
-          this.answer5 = data.answer5;
-          this.answer6 = data.answer6;
-          this.detectionId = data.detectionId;
+          if (data) {
+            this.content1 = data.content1;
+            this.content2 = data.content2;
+            this.content3 = data.content3;
+            this.content4 = data.content4;
+            this.content5 = data.content5;
+            this.content6 = data.content6;
+            this.answer1 = data.answer1;
+            this.answer2 = data.answer2;
+            this.answer3 = data.answer3;
+            this.answer4 = data.answer4;
+            this.answer5 = data.answer5;
+            this.answer6 = data.answer6;
+            this.detectionId = data.detectionId;
+          }
+
           // let status = data.status;
           // switch (status) {
           //   case 1:

@@ -3,9 +3,6 @@
     <div class="child_head">
       <div class="block"></div>
       <div class="child_title">{{title}}</div>
-       <div class="edit">
-        <el-button size="mini" icon="el-icon-edit" circle></el-button>
-      </div>
     </div>
     <div class="mainbody">
       <div class="maintitle">

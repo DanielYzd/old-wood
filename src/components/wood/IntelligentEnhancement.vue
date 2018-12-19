@@ -22,7 +22,7 @@
             </div>
           </div>
 
-          <el-button type="text" @click="view(item.intelligentId)">查看</el-button>
+          <el-button type="text" @click="view(item.intelligentId,item.simpleTitle)">查看</el-button>
         </div>
       </el-card>
     </div>
@@ -48,9 +48,9 @@ export default {
     });
   },
   methods: {
-    view(id) {
+    view(id,title) {
       this.$router.push({
-        path: `/IntelligentEnhancementDetail/${id}`
+        path: `/IntelligentEnhancementDetail/${id}/${title}`
       });
     },
     add() {

@@ -282,6 +282,12 @@ const serviceModule = {
         method: 'get',
         showLoading: false
     },
+    //POST /school/common/setTitleByID
+    setTitleByID: {
+        url: apiBaseUrl + 'school/common/setTitleByID',
+        method: 'post',
+        showLoading: false
+    },
     //school/manager/deleteTeacherInfo
     deleteTeacherInfo: {
         url: apiBaseUrl + 'school/manager/deleteTeacherInfo',
