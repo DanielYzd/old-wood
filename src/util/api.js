@@ -2,6 +2,7 @@ import Config from "../config/config.js";
 const apiBaseUrl = Config.apiBaseUrl;
 // const apiPcsUrl = Config.apiPcsUrl;
 // const apiPqsUrl = Config.apiPqsUrl;
+
 const serviceModule = {
     //登录
     login: {
