@@ -50,12 +50,14 @@
               &nbsp;
               <img
                 src="/static/bj1.png"
+                style=" cursor: pointer;"
                 onmouseover="this.src=('/static/bj2.png')"
                 onmouseout="this.src=('/static/bj1.png')"
                 @click="edit(scope.row.teacherId,scope.row)"
               >
               &nbsp;
               <img
+              style=" cursor: pointer;"
                 src="/static/shanchu.png"
                 @click="remove(scope.row.teacherId)"
               >
