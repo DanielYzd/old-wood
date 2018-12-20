@@ -339,6 +339,9 @@ export default {
 
       .table {
         padding: 20px;
+        img{
+        cursor: pointer;
+        }
       }
     }
   }
