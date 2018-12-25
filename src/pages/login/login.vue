@@ -15,7 +15,13 @@
         </div>
         <div class="second_row">
           <div class="user_title">账户密码:</div>
-          <el-input v-model="userPwd" type="password" placeholder="请输入账户密码" class="user_input" @keyup.enter.native="onSubmit"></el-input>
+          <el-input
+            v-model="userPwd"
+            type="password"
+            placeholder="请输入账户密码"
+            class="user_input"
+            @keyup.enter.native="onSubmit"
+          ></el-input>
         </div>
       </div>
       <div class="form_submit">
@@ -38,24 +44,22 @@ export default {
         username: this.userName,
         password: this.userPwd
       };
-      if(this.userName&&this.userPwd){
+      if (this.userName && this.userPwd) {
         this.http(this.api.login, body).then(res => {
-        console.log(res);
-        if ((res.data.code = "0000")) {
-       
-          window.localStorage.setItem("sessionId", res.data.data.sessionId);
-          window.localStorage.setItem("userName", this.userName);
-          console.log(res.data.data)
-          this.$router.push("/VideoSub");
-        }
-      });
-      }else{
+          console.log(res);
+          if ((res.data.code = "0000")) {
+            window.localStorage.setItem("sessionId", res.data.data.sessionId);
+            window.localStorage.setItem("userName", this.userName);
+            console.log(res.data.data);
+            this.$router.push("/VideoSub");
+          }
+        });
+      } else {
         this.$message({
-          type:'error',
-          message:'用户名密码不能为空'
-        })
+          type: "error",
+          message: "用户名密码不能为空"
+        });
       }
-      
     }
   }
 };
@@ -119,7 +123,8 @@ export default {
         border-bottom: 1px solid #ffffff;
         margin: 0 30px;
         .user_title {
-          display: inline;
+          display: inline-block;
+          width: 60px;
           font-size: 14px;
           font-family: PingFang-SC-Medium;
           font-weight: bold;
@@ -140,7 +145,8 @@ export default {
         margin: 0 30px;
         margin-top: 10px;
         .user_title {
-          display: inline;
+          display: inline-block;
+          width: 60px;
           font-size: 14px;
           font-family: PingFang-SC-Medium;
           font-weight: bold;
