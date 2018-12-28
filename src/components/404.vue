@@ -27,11 +27,6 @@ export default {};
 /*=======================================
     GENERAL STYLES
 ==================================================*/
-body {
-  /* font-family: 'Nova Flat', cursive;
-    background-color: #B396FF;
-color: #fff; */
-}
 .pad-top {
   padding-top: 60px;
 }
